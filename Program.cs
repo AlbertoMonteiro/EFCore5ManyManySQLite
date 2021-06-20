@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ConsoleSqlLiteEfCore;
 
 using var ctx = new SampleDbContext();
@@ -14,6 +13,11 @@ ctx.Post.Add(new Post
             Tag = new Tag
             {
                 Name = "csharp"
+            },
+            User = new User
+            {
+                Name = "Alberto",
+                Age = 31
             }
         }
     }

@@ -7,7 +7,13 @@ namespace ConsoleSqlLiteEfCore
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<PostTag> builder)
         {
             builder
-               .HasKey(pt => (new { pt.PostId, pt.TagId }));
+               .HasKey(pt => (new { pt.PostId, pt.TagId, pt.UserId }));
+
+            builder
+                .HasOne(pt => pt.User)
+                .WithMany()
+                .HasForeignKey(pt => pt.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasOne(pt => pt.Tag)

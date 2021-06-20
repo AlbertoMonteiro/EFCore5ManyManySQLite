@@ -38,12 +38,17 @@ namespace ConsoleSqlLiteEfCore.Migrations
                     b.Property<int>("TagId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PostId", "TagId");
+                    b.HasKey("PostId", "TagId", "UserId");
 
                     b.HasIndex("TagId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("PostTag");
                 });
@@ -62,6 +67,23 @@ namespace ConsoleSqlLiteEfCore.Migrations
                     b.ToTable("Tag");
                 });
 
+            modelBuilder.Entity("ConsoleSqlLiteEfCore.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("ConsoleSqlLiteEfCore.PostTag", b =>
                 {
                     b.HasOne("ConsoleSqlLiteEfCore.Tag", "Tag")
@@ -76,9 +98,17 @@ namespace ConsoleSqlLiteEfCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ConsoleSqlLiteEfCore.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Post");
 
                     b.Navigation("Tag");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ConsoleSqlLiteEfCore.Post", b =>

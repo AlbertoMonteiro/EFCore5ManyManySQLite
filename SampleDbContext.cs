@@ -6,6 +6,7 @@ namespace ConsoleSqlLiteEfCore
     {
         public DbSet<Post> Post { get; set; }
         public DbSet<Tag> Tag { get; set; }
+        public DbSet<ConsoleSqlLiteEfCore.User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
