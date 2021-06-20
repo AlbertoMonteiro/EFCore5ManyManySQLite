@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleSqlLiteEfCore.Migrations
 {
     [DbContext(typeof(SampleDbContext))]
-    [Migration("20210620174027_Initial")]
+    [Migration("20210620174347_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

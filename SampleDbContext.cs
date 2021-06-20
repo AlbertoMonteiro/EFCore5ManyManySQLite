@@ -15,7 +15,7 @@ namespace ConsoleSqlLiteEfCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SampleDbContext).Assembly);
+            modelBuilder.ApplyConfiguration<PostTag>(new PostTagEntityTypeConfiguration());
         }
     }
 }
