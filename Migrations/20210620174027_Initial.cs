@@ -45,14 +45,14 @@ namespace ConsoleSqlLiteEfCore.Migrations
                 {
                     table.PrimaryKey("PK_PostTag", x => new { x.PostId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_PostTag_Post_PostId",
-                        column: x => x.PostId,
+                        name: "FK_PostTag_Post_TagId",
+                        column: x => x.TagId,
                         principalTable: "Post",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PostTag_Tag_TagId",
-                        column: x => x.TagId,
+                        name: "FK_PostTag_Tag_PostId",
+                        column: x => x.PostId,
                         principalTable: "Tag",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);

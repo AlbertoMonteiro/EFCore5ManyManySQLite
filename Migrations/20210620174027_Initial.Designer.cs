@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleSqlLiteEfCore.Migrations
 {
     [DbContext(typeof(SampleDbContext))]
-    [Migration("20210617205648_Initial")]
+    [Migration("20210620174027_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,21 +32,7 @@ namespace ConsoleSqlLiteEfCore.Migrations
                     b.ToTable("Post");
                 });
 
-            modelBuilder.Entity("ConsoleSqlLiteEfCore.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tag");
-                });
-
-            modelBuilder.Entity("PostTag", b =>
+            modelBuilder.Entity("ConsoleSqlLiteEfCore.PostTag", b =>
                 {
                     b.Property<int>("PostId")
                         .HasColumnType("INTEGER");
@@ -64,16 +50,30 @@ namespace ConsoleSqlLiteEfCore.Migrations
                     b.ToTable("PostTag");
                 });
 
-            modelBuilder.Entity("PostTag", b =>
+            modelBuilder.Entity("ConsoleSqlLiteEfCore.Tag", b =>
                 {
-                    b.HasOne("ConsoleSqlLiteEfCore.Post", "Post")
-                        .WithMany()
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tag");
+                });
+
+            modelBuilder.Entity("ConsoleSqlLiteEfCore.PostTag", b =>
+                {
+                    b.HasOne("ConsoleSqlLiteEfCore.Tag", "Tag")
+                        .WithMany("Posts")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ConsoleSqlLiteEfCore.Tag", "Tag")
-                        .WithMany()
+                    b.HasOne("ConsoleSqlLiteEfCore.Post", "Post")
+                        .WithMany("Tags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -81,6 +81,16 @@ namespace ConsoleSqlLiteEfCore.Migrations
                     b.Navigation("Post");
 
                     b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("ConsoleSqlLiteEfCore.Post", b =>
+                {
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("ConsoleSqlLiteEfCore.Tag", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

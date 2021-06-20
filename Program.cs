@@ -7,11 +7,14 @@ using var ctx = new SampleDbContext();
 ctx.Post.Add(new Post
 {
     Title = "How to create N..N",
-    Tags = new List<Tag>
+    Tags = new List<PostTag>
     {
-        new Tag
+        new PostTag
         {
-            Name = "csharp"
+            Tag = new Tag
+            {
+                Name = "csharp"
+            }
         }
     }
 });
